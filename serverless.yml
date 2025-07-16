@@ -1,0 +1,41 @@
+service: telegram-alert-bot
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: us-west-2
+  environment:
+    BOT_TOKEN: ${env:BOT_TOKEN}
+    ALPHA_VANTAGE_KEY: ${env:ALPHA_VANTAGE_KEY}
+    DDB_TABLE: ${env:DDB_TABLE}
+    INDEX_TABLE: ${env:INDEX_TABLE}
+
+package:
+  include:
+    - src/**
+    - requirements.txt
+  exclude:
+    - node_modules/**
+    - tests/**
+
+functions:
+  telegramWebhook:
+    handler: src/handler.lambda_handler
+    events:
+      - http:
+          path: telegram
+          method: post
+
+  priceChecker:
+    handler: src/handler.price_checker
+    events:
+      - schedule:
+          rate: rate(1 minute)
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    slim: false

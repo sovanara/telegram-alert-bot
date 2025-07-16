@@ -1,0 +1,8 @@
+{
+  "name": "telegram-alert-bot",
+  "description": "",
+  "version": "0.1.0",
+  "devDependencies": {
+    "serverless-python-requirements": "^6.1.2"
+  }
+}

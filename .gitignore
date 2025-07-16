@@ -1,0 +1,21 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Serverless artifacts
+.serverless/
+*.zip
+
+# Environment files
+.env
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Misc
+build/
+node_modules/
+python/
